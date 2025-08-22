@@ -1,0 +1,86 @@
+# C++ build artifacts
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+*.a
+*.lib
+*.lo
+*.def
+*.exp
+*.pdb
+*.idb
+*.class
+
+# CMake build folders
+[Cc]MakeCache.txt
+[Cc]MakeFiles/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+Debug/
+Release/
+
+# Visual Studio files
+*.sln
+*.vcxproj*
+*.user
+*.opensdf
+*.sdf
+*.ipch
+*.log
+*.tlog
+*.lastbuildstate
+*.vscode/
+.vscode/
+!.vscode/extensions.json
+
+# Qt Creator
+*.pro.user
+*.qbs.user
+*.moc
+*.rcc
+*.qrc
+
+# Code::Blocks
+*.cbp
+*.layout
+
+# CLion
+.idea/
+*.iml
+
+# Other IDEs
+*.DS_Store
+*.swp
+*.bak
+*.tmp
+*.~*
+
+# Test and coverage
+*.gcno
+*.gcda
+*.gcov
+
+# Generated files
+*.generated.cpp
+*.generated.h
+
+# Package managers
+conanbuild/
+conaninfo.txt
+conanfile.lock
+vcpkg_installed/
+
+# Misc
+*.log
+*.cache
+*.tags
+*.ccls-cache/
+
+# Ignore everything in build folders
+build*/
