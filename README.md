@@ -55,6 +55,8 @@ out\Release\cli.exe
 
 After building, you can run unit tests for the build you made:
 
+Unit tests use [doctest](https://github.com/doctest/doctest) version 2.4.12.
+
 To run tests in Debug build:
 
 ```sh
