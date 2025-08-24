@@ -84,3 +84,7 @@ vcpkg_installed/
 
 # Ignore everything in build folders
 build*/
+
+# CTest
+CTestTestfile.cmake
+Testing/

@@ -26,12 +26,43 @@ cmake -S . -B build
 
 6. Build the project:
 
+To make a Debug build:
+
+```sh
+cmake --build build
+```
+
+To make a Release build:
+
 ```sh
 cmake --build build --config Release
 ```
 
 7. Run the executable (adjust path if needed):
 
+To run a Debug build:
+
+````sh
+out\Debug\cli.exe
+
+To run a Release build:
+
 ```sh
 out\Release\cli.exe
+````
+
+## Running Unit Tests
+
+After building, you can run unit tests for the build you made:
+
+To run tests in Debug build:
+
+```sh
+out\Debug\tests.exe
+```
+
+To run tests in Release build:
+
+```sh
+out\Release\tests.exe
 ```

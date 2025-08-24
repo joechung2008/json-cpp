@@ -34,3 +34,11 @@ target_include_directories(cli PRIVATE src/lib/parsers)
 if(MSVC)
     target_compile_options(cli PRIVATE /EHsc)
 endif()
+
+# Doctest integration: add all test sources in tests/
+file(GLOB TEST_SOURCES tests/*.cpp tests/lib/parsers/*.cpp)
+add_executable(tests ${TEST_SOURCES})
+target_link_libraries(tests PRIVATE json_parsers)
+target_include_directories(tests PRIVATE src/lib/parsers external/doctest)
+enable_testing()
+add_test(NAME doctest COMMAND tests)

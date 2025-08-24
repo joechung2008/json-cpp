@@ -44,4 +44,9 @@ This project is a modular C++ JSON parser with a clear separation of concerns:
 - Avoid global variables.
 - Use exceptions for error handling.
 
+## Build and Test Instructions
+
+For details on building the project and running unit tests (Debug/Release), see [README.md](../README.md).  
+Unit tests are provided in the `tests/` directory and can be run using the instructions in the README.
+
 Copilot should generate code that fits these patterns and conventions.
