@@ -5,5 +5,5 @@
 #include "../types.hpp"
 
 namespace json {
-    std::shared_ptr<Token> parseValue(std::string, std::regex delimiters = std::regex("[ \\n\\r\\t]"));
+    std::shared_ptr<Token> parseValue(const std::string&, const std::regex& delimiters = std::regex(R"([ \n\r\t])"));
 }

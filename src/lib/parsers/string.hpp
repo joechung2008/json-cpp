@@ -5,5 +5,5 @@
 #include "../types.hpp"
 
 namespace json {
-    std::shared_ptr<StringToken> parseString(std::string);
+    std::shared_ptr<StringToken> parseString(const std::string&);
 }

@@ -50,7 +50,7 @@ TEST_CASE("parseValue: array") {
 }
 
 TEST_CASE("parseValue: object") {
-    auto token = json::parseValue("{\"a\":1,\"b\":false}");
+    auto token = json::parseValue(R"({"a":1,"b":false})");
     CHECK(dynamic_cast<json::ObjectToken*>(token.get()) != nullptr);
     auto obj = dynamic_cast<json::ObjectToken*>(token.get());
     CHECK(obj->members.size() == 2);

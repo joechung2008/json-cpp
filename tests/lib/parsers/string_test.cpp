@@ -28,42 +28,42 @@ TEST_CASE("parseValue: string with spaces") {
 }
 
 TEST_CASE("parseValue: string with escaped quotes") {
-    auto token = json::parseValue("\"foo \\\"bar\\\" baz\"");
+    auto token = json::parseValue(R"("foo \"bar\" baz")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "foo \"bar\" baz");
 }
 
 TEST_CASE("parseValue: string with unicode") {
-    auto token = json::parseValue("\"\\u0041\\u0042\\u0043\"");
+    auto token = json::parseValue(R"("\u0041\u0042\u0043")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "ABC");
 }
 
 TEST_CASE("parseValue: string with escaped backslash") {
-    auto token = json::parseValue("\"foo\\\\bar\"");
+    auto token = json::parseValue(R"("foo\\bar")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "foo\\bar");
 }
 
 TEST_CASE("parseValue: string with newline") {
-    auto token = json::parseValue("\"foo\\nbar\"");
+    auto token = json::parseValue(R"("foo\nbar")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "foo\nbar");
 }
 
 TEST_CASE("parseValue: string with tab") {
-    auto token = json::parseValue("\"foo\\tbar\"");
+    auto token = json::parseValue(R"("foo\tbar")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "foo\tbar");
 }
 
 TEST_CASE("parseValue: string with carriage return") {
-    auto token = json::parseValue("\"foo\\rbar\"");
+    auto token = json::parseValue(R"("foo\rbar")");
     CHECK(dynamic_cast<json::StringToken*>(token.get()) != nullptr);
     auto str = dynamic_cast<json::StringToken*>(token.get());
     CHECK(str->value == "foo\rbar");

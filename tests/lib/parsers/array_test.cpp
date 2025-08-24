@@ -23,7 +23,7 @@ TEST_CASE("parseValue: array of numbers") {
 }
 
 TEST_CASE("parseValue: array of strings") {
-    auto token = json::parseValue("[\"a\",\"b\",\"c\"]");
+    auto token = json::parseValue(R"(["a","b","c"])");
     CHECK(dynamic_cast<json::ArrayToken*>(token.get()) != nullptr);
     auto arr = dynamic_cast<json::ArrayToken*>(token.get());
     CHECK(arr->elements.size() == 3);
@@ -51,7 +51,7 @@ TEST_CASE("parseValue: array of nulls") {
 }
 
 TEST_CASE("parseValue: array of objects") {
-    auto token = json::parseValue("[{\"a\":1},{\"b\":2}]");
+    auto token = json::parseValue(R"([{"a":1},{"b":2}])");
     CHECK(dynamic_cast<json::ArrayToken*>(token.get()) != nullptr);
     auto arr = dynamic_cast<json::ArrayToken*>(token.get());
     CHECK(arr->elements.size() == 2);
@@ -69,7 +69,7 @@ TEST_CASE("parseValue: array of arrays") {
 }
 
 TEST_CASE("parseValue: mixed type array") {
-    auto token = json::parseValue("[1,\"a\",true,null,{\"x\":2},[3,4]]");
+    auto token = json::parseValue(R"([1,"a",true,null,{"x":2},[3,4]])");
     CHECK(dynamic_cast<json::ArrayToken*>(token.get()) != nullptr);
     auto arr = dynamic_cast<json::ArrayToken*>(token.get());
     CHECK(arr->elements.size() == 6);

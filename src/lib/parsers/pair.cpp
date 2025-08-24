@@ -12,7 +12,7 @@
 using namespace std;
 
 namespace json {
-    shared_ptr<PairToken> parsePair(string s, regex delimiters) {
+    shared_ptr<PairToken> parsePair(const string& s, const regex& delimiters) {
         enum class Mode {
             Scanning,
             Key,
@@ -23,7 +23,7 @@ namespace json {
         
         auto mode = Mode::Scanning;
         auto pos = 0;
-        regex whitespace = regex(R"([ \n\r\t])");
+        const regex whitespace(R"([ \n\r\t])");
         shared_ptr<StringToken> key;
         shared_ptr<Token> value;
         
@@ -49,7 +49,7 @@ namespace json {
             case Mode::Colon:
                 if (regex_search(ch, whitespace)) {
                     pos++;
-                } else if (ch.compare(":") == 0) {
+                } else if (ch == ":") {
                     pos++;
                     mode = Mode::Value;
                 } else {
@@ -72,6 +72,6 @@ namespace json {
             }
         }
         
-        return shared_ptr<PairToken>(new PairToken(pos, key, value));
+        return std::make_shared<PairToken>(pos, key, value);
     }
 }

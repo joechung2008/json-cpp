@@ -4,5 +4,5 @@
 #include "../types.hpp"
 
 namespace json {
-    std::shared_ptr<ArrayToken> parseArray(std::string);
+    std::shared_ptr<ArrayToken> parseArray(const std::string&);
 }

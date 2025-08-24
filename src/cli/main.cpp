@@ -11,7 +11,7 @@ int main()
     try
     {
         string s((istreambuf_iterator<char>(cin)), istreambuf_iterator<char>());
-        auto json = parseValue(s);
+        const auto json = parseValue(s);
         cout << *json << endl;
     }
     catch (exception &ex)

@@ -7,7 +7,7 @@
 using namespace std;
 
 namespace json {
-    shared_ptr<NumberToken> parseNumber(string s, regex delimiters) {
+    shared_ptr<NumberToken> parseNumber(const string& s, const regex& delimiters) {
         enum class Mode {
             Scanning,
             Minus,
@@ -24,7 +24,7 @@ namespace json {
         
         auto mode = Mode::Scanning;
         auto pos = 0;
-        string value = "";
+        string value;
         regex whitespace(R"([ \n\r\t])");
         regex digits(R"(\d)");
         regex nonzeroDigits("[1-9]");
@@ -36,7 +36,7 @@ namespace json {
             case Mode::Scanning:
                 if (regex_search(ch, whitespace)) {
                     pos++;                    
-                } else if (ch.compare("-") == 0) {
+                } else if (ch == "-") {
                     value += "-";
                     pos++;
                 }
@@ -44,7 +44,7 @@ namespace json {
                 break;
                 
             case Mode::Characteristic:
-                if (ch.compare("0") == 0) {
+                if (ch == "0") {
                     value += "0";
                     pos++;
                     mode = Mode::DecimalPoint;                    
@@ -69,7 +69,7 @@ namespace json {
                 break;
                 
             case Mode::DecimalPoint:
-                if (ch.compare(".") == 0) {
+                if (ch == ".") {
                     value += ".";
                     pos++;
                     mode = Mode::Mantissa;
@@ -84,7 +84,7 @@ namespace json {
                 if (regex_search(ch, digits)) {
                     value += ch;
                     pos++;
-                } else if (ch.compare("e") == 0 || ch.compare("E") == 0) {
+                } else if (ch == "e" || ch == "E") {
                     mode = Mode::Exponent;
                 } else if (regex_search(ch, delimiters)) {
                     mode = Mode::End;
@@ -94,7 +94,7 @@ namespace json {
                 break;
                 
             case Mode::Exponent:
-                if (ch.compare("e") == 0 || ch.compare("E") == 0) {
+                if (ch == "e" || ch == "E") {
                     value += "e";
                     pos++;
                     mode = Mode::ExponentSign;
@@ -104,7 +104,7 @@ namespace json {
                 break;
                 
             case Mode::ExponentSign:
-                if (ch.compare("+") == 0 || ch.compare("-") == 0) {
+                if (ch == "+" || ch == "-") {
                     value += ch;
                     pos++;
                 }
@@ -150,6 +150,6 @@ namespace json {
         }
 
         double number = stod(value);
-        return shared_ptr<NumberToken>(new NumberToken(pos, number));
+        return std::make_shared<NumberToken>(pos, number);
     }
 }

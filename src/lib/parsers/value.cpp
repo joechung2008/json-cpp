@@ -1,5 +1,5 @@
-#include <string>
 #include <memory>
+#include <string>
 #include <regex>
 #include <stdexcept>
 #include "../types/token.hpp"
@@ -15,7 +15,7 @@
 using namespace std;
 
 namespace json {
-    shared_ptr<Token> parseValue(string s, regex delimiters) {
+    shared_ptr<Token> parseValue(const string& s, const regex& delimiters) {
         enum class Mode {
             Scanning,
             Array,
@@ -30,8 +30,8 @@ namespace json {
         
         auto mode = Mode::Scanning;
         auto pos = 0;
-        regex number(R"([\-\d])");
-        regex whitespace(R"([ \n\r\t])");
+        const regex number(R"([\-\d])");
+        const regex whitespace(R"([ \n\r\t])");
         shared_ptr<Token> token = nullptr;
         
         while (pos < s.length() && mode != Mode::End) {
@@ -41,19 +41,19 @@ namespace json {
             case Mode::Scanning:
                 if (regex_search(ch, whitespace)) {
                     pos++;
-                } else if (ch.compare("[") == 0) {
+                } else if (ch == "[") {
                     mode = Mode::Array;
-                } else if (ch.compare("f") == 0) {
+                } else if (ch == "f") {
                     mode = Mode::False;
-                } else if (ch.compare("n") == 0) {
+                } else if (ch == "n") {
                     mode = Mode::Null;
                 } else if (regex_search(ch, number)) {
                     mode = Mode::Number;
-                } else if (ch.compare("{") == 0) {
+                } else if (ch == "{") {
                     mode = Mode::Object;
-                } else if (ch.compare("\"") == 0) {
+                } else if (ch == "\"") {
                     mode = Mode::String;
-                } else if (ch.compare("t") == 0) {
+                } else if (ch == "t") {
                     mode = Mode::True;
                 } else if (regex_search(ch, delimiters)) {
                     mode = Mode::End;
@@ -71,8 +71,8 @@ namespace json {
                 
             case Mode::False:
                 slice = s.substr(pos, 5);
-                if (slice.compare("false") == 0) {
-                    token = shared_ptr<FalseToken>(new FalseToken(pos + 5));
+                if (slice == "false") {
+                    token = std::make_shared<FalseToken>(pos + 5);
                     mode = Mode::End;
                 } else {
                     throw runtime_error("Expected 'false'");
@@ -81,8 +81,8 @@ namespace json {
                 
             case Mode::Null:
                 slice = s.substr(pos, 4);
-                if (slice.compare("null") == 0) {
-                    token = shared_ptr<NullToken>(new NullToken(pos + 4));
+                if (slice == "null") {
+                    token = std::make_shared<NullToken>(pos + 4);
                     mode = Mode::End;
                 } else {
                     throw runtime_error("Expected 'null'");
@@ -112,8 +112,8 @@ namespace json {
                 
             case Mode::True:
                 slice = s.substr(pos, 4);
-                if (slice.compare("true") == 0) {
-                    token = shared_ptr<TrueToken>(new TrueToken(pos + 4));
+                if (slice == "true") {
+                    token = std::make_shared<TrueToken>(pos + 4);
                     mode = Mode::End;
                 } else {
                     throw runtime_error("Expected 'true'");
@@ -132,6 +132,6 @@ namespace json {
             throw runtime_error("value cannot be empty");
         }
         
-        return shared_ptr<Token>(token);
+        return token;
     }
 }

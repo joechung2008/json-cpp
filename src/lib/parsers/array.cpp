@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace json {
-    shared_ptr<ArrayToken> parseArray(string s) {
+    shared_ptr<ArrayToken> parseArray(const string& s) {
         enum class Mode {
             Scanning,
             Element,
@@ -20,8 +20,8 @@ namespace json {
         
         auto mode = Mode::Scanning;
         auto pos = 0;
-        regex whitespace(R"([ \n\r\t])");
-        auto pelements = shared_ptr<vector<shared_ptr<Token>>>(new vector<shared_ptr<Token>>());
+        const regex whitespace(R"([ \n\r\t])");
+        auto pElements = std::make_shared<vector<shared_ptr<Token>>>();
 
         while (pos < s.length() && mode != Mode::End) {
             string ch(1, s[pos]);
@@ -30,7 +30,7 @@ namespace json {
             case Mode::Scanning:
                 if (regex_search(ch, whitespace)) {
                     pos++;
-                } else if (ch.compare("[") == 0) {
+                } else if (ch == "[") {
                     pos++;
                     mode = Mode::Element;
                 } else {
@@ -42,7 +42,7 @@ namespace json {
                 if (regex_search(ch, whitespace)) {
                     pos++;
                 } else if (ch == "]") {
-                    if (pelements->size() > 0) {
+                    if (!pElements->empty()) {
                         throw runtime_error("Unexpected ','");
                     }
                     
@@ -51,7 +51,7 @@ namespace json {
                 } else {
                     string slice = s.substr(pos);
                     shared_ptr<Token> element = parseValue(slice, regex(R"([ \n\r\t\],])"));
-                    pelements->push_back(element);
+                    pElements->push_back(element);
                     pos += element->skip;
                     mode = Mode::Comma;
                 }
@@ -60,25 +60,25 @@ namespace json {
             case Mode::Comma:
                 if (regex_search(ch, whitespace)) {
                     pos++;
-                } else if (ch.compare(",") == 0) {
+                } else if (ch == ",") {
                     pos++;
                     mode = Mode::Element;
-                } else if (ch.compare("]") == 0) {
+                } else if (ch == "]") {
                     pos++;
                     mode = Mode::End;
                 } else {
                     throw runtime_error("Expected ',' or ']'");
                 }
                 break;
-                
+
             case Mode::End:
                 break;
-                
+
             default:
                 throw runtime_error("Unexpected mode");
             }
         }
         
-        return shared_ptr<ArrayToken>(new ArrayToken(pos, *pelements));
+        return std::make_shared<ArrayToken>(pos, *pElements);
     }
 }

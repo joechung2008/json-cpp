@@ -8,7 +8,7 @@
 using namespace std;
 
 namespace json {
-    shared_ptr<StringToken> parseString(string s) {
+    shared_ptr<StringToken> parseString(const string& s) {
         enum class Mode {
             Scanning,
             Char,
@@ -20,7 +20,7 @@ namespace json {
         auto mode = Mode::Scanning;
         auto pos = 0;
         string value;
-        regex whitespace(R"([ \n\r\t])");
+        const regex whitespace(R"([ \n\r\t])");
 
         while (pos < s.length() && mode != Mode::End) {
             string ch(1, s[pos]);
@@ -29,7 +29,7 @@ namespace json {
             case Mode::Scanning:
                 if (regex_search(ch, whitespace)) {
                     pos++;
-                } else if (ch.compare("\"") == 0) {
+                } else if (ch == "\"") {
                     value = "";
                     pos++;
                     mode = Mode::Char;
@@ -39,13 +39,13 @@ namespace json {
                 break;
                 
             case Mode::Char:
-                if (ch.compare("\\") == 0) {
+                if (ch == "\\") {
                     pos++;
                     mode = Mode::EscapedChar;
-                } else if (ch.compare("\"") == 0) {
+                } else if (ch == "\"") {
                     pos++;
                     mode = Mode::End;
-                } else if (ch.compare("\n") != 0 && ch.compare("\r") != 0) {
+                } else if (ch != "\n" && ch != "\r") {
                     value += ch;
                     pos++;
                 } else {
@@ -54,31 +54,31 @@ namespace json {
                 break;
                 
             case Mode::EscapedChar:
-                if (ch.compare("\"") == 0 || ch.compare("\\") == 0 || ch.compare("/") == 0) {
+                if (ch == "\"" || ch == "\\" || ch == "/") {
                     value += ch;
                     pos++;
                     mode = Mode::Char;
-                } else if (ch.compare("b") == 0) {
+                } else if (ch == "b") {
                     value += "\b";
                     pos++;
                     mode = Mode::Char;                    
-                } else if (ch.compare("f") == 0) {
+                } else if (ch == "f") {
                     value += "\f";
                     pos++;
                     mode = Mode::Char;                    
-                } else if (ch.compare("n") == 0) {
+                } else if (ch == "n") {
                     value += "\n";
                     pos++;
                     mode = Mode::Char;                    
-                } else if (ch.compare("r") == 0) {
+                } else if (ch == "r") {
                     value += "\r";
                     pos++;
                     mode = Mode::Char;                    
-                } else if (ch.compare("t") == 0) {
+                } else if (ch == "t") {
                     value += "\t";
                     pos++;
                     mode = Mode::Char;                    
-                } else if (ch.compare("u") == 0) {
+                } else if (ch == "u") {
                     pos++;
                     mode = Mode::Unicode;
                 }
@@ -89,10 +89,10 @@ namespace json {
                     try {
                         string slice = s.substr(pos, 4);
                         int hex = stol(slice, nullptr, 16);
-                        value += (char)hex;
+                        value += static_cast<char>(hex);
                         pos += 4;
                         mode = Mode::Char;
-                    } catch (invalid_argument) {
+                    } catch ([[maybe_unused]] const std::exception& invalid_argument) {
                         throw runtime_error("unexpected Unicode code");
                     }
                 }
@@ -106,6 +106,6 @@ namespace json {
             }
         }
 
-        return shared_ptr<StringToken>(new StringToken(pos, value));
+        return std::make_shared<StringToken>(pos, value);
     }
 }
