@@ -87,4 +87,4 @@ build*/
 
 # CTest
 CTestTestfile.cmake
-Testing/
+Testing/Temporary/
