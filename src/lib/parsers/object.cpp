@@ -3,84 +3,105 @@
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types/objecttoken.hpp"
-#include "../types/pairtoken.hpp"
+#include "../types.hpp"
 #include "object.hpp"
 #include "pair.hpp"
 
-using namespace std;
-
-namespace json {
-    shared_ptr<ObjectToken> parseObject(const string& s) {
-        enum class Mode {
+namespace json
+{
+    std::shared_ptr<ObjectToken> parseObject(const std::string &s)
+    {
+        enum class Mode
+        {
             Scanning,
             LeftBrace,
             Pair,
             Delimiter,
             End
         };
-        
+
         auto mode = Mode::Scanning;
         auto pos = 0;
-        regex whitespace(R"([ \n\r\t])");
-        auto pMembers = std::make_shared<vector<shared_ptr<PairToken>>>();
-        
-        while (pos < s.length() && mode != Mode::End) {
-            string ch(1, s[pos]);
-            
-            switch (mode) {
+        const std::regex delimiters(R"([ \n\r\t,\}])");
+        const std::regex whitespace(R"([ \n\r\t])");
+        auto pMembers = std::make_shared<std::vector<std::shared_ptr<PairToken>>>();
+
+        while (pos < s.length() && mode != Mode::End)
+        {
+            std::string ch(1, s[pos]);
+
+            switch (mode)
+            {
             case Mode::Scanning:
-                if (regex_search(ch, whitespace)) {
+                if (regex_search(ch, whitespace))
+                {
                     pos++;
-                } else if (ch == "{") {
+                }
+                else if (ch == "{")
+                {
                     pos++;
                     mode = Mode::Pair;
-                } else {
-                    throw runtime_error("Expected '{'");
+                }
+                else
+                {
+                    throw std::runtime_error("Expected '{'");
                 }
                 break;
 
             case Mode::Pair:
-                if (regex_search(ch, whitespace)) {
+                if (regex_search(ch, whitespace))
+                {
                     pos++;
-                } else if (ch == "}") {
-                    if (!pMembers->empty()) {
-                        throw runtime_error("Unexpected ','");
+                }
+                else if (ch == "}")
+                {
+                    if (!pMembers->empty())
+                    {
+                        throw std::runtime_error("Unexpected ','");
                     }
 
                     pos++;
                     mode = Mode::End;
-                } else {
-                    string slice = s.substr(pos);
-                    shared_ptr<PairToken> member = parsePair(slice, regex(R"([ \n\r\t,\}])"));
+                }
+                else
+                {
+                    std::string slice = s.substr(pos);
+                    std::shared_ptr<PairToken> member = parsePair(slice, delimiters);
                     pMembers->push_back(member);
                     pos += member->skip;
                     mode = Mode::Delimiter;
                 }
                 break;
-                
+
             case Mode::Delimiter:
-                if (regex_search(ch, whitespace)) {
+                if (regex_search(ch, whitespace))
+                {
                     pos++;
-                } else if (ch == ",") {
+                }
+                else if (ch == ",")
+                {
                     pos++;
                     mode = Mode::Pair;
-                } else if (ch == "}") {
+                }
+                else if (ch == "}")
+                {
                     pos++;
                     mode = Mode::End;
-                } else {
-                    throw runtime_error("Expected ',' or '}'");
+                }
+                else
+                {
+                    throw std::runtime_error("Expected ',' or '}'");
                 }
                 break;
 
             case Mode::End:
                 break;
-                
+
             default:
-                throw runtime_error("Unexpected mode");
+                throw std::runtime_error("Unexpected mode");
             }
         }
-        
+
         return std::make_shared<ObjectToken>(pos, *pMembers);
     }
 }

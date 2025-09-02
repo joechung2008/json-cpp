@@ -3,20 +3,24 @@
 #include "../lib/parsers/value.hpp"
 #include "../lib/types/token.hpp"
 
-using namespace json;
-using namespace std;
-
 int main()
 {
     try
     {
-        string s((istreambuf_iterator<char>(cin)), istreambuf_iterator<char>());
-        const auto json = parseValue(s);
-        cout << *json << endl;
+        std::string input((std::istreambuf_iterator<char>(std::cin)), std::istreambuf_iterator<char>());
+        if (input.empty())
+        {
+            std::cerr << "No input provided." << std::endl;
+            return 1;
+        }
+
+        auto jsonValue = json::parseValue(input);
+        std::cout << *jsonValue << std::endl;
     }
-    catch (exception &ex)
+    catch (const std::exception &ex)
     {
-        cerr << ex.what() << endl;
+        std::cerr << "Error: " << ex.what() << std::endl;
+        return 1;
     }
 
     return 0;
