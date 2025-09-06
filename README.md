@@ -8,7 +8,7 @@ MIT
 
 [json.org](http://json.org)
 
-## Building and Running with Visual Studio 2022 Build Tools
+## Building, Running, and Testing with Visual Studio 2022 Build Tools
 
 1. Install [Visual Studio 2022 Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
 
@@ -51,9 +51,7 @@ To run a Release build:
 out\Release\cli.exe
 ````
 
-## Running Unit Tests
-
-After building, you can run unit tests for the build you made:
+8. Run unit tests:
 
 Unit tests use [doctest](https://github.com/doctest/doctest) version 2.4.12.
 
@@ -67,4 +65,39 @@ To run tests in Release build:
 
 ```sh
 out\Release\tests.exe
+```
+
+## Building and Running on Linux (WSL/Ubuntu)
+
+1. Install required tools:
+
+```sh
+sudo apt update
+sudo apt install build-essential cmake
+```
+
+2. Navigate to the project directory.
+
+3. Generate build files:
+
+```sh
+cmake -S . -B build
+```
+
+4. Build the project:
+
+```sh
+cmake --build build
+```
+
+5. Run the CLI executable:
+
+```sh
+./out/cli
+```
+
+6. Run unit tests:
+
+```sh
+./out/tests
 ```

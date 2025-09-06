@@ -24,6 +24,7 @@ Makefile
 build/
 Debug/
 Release/
+out/
 
 # Visual Studio files
 *.sln
