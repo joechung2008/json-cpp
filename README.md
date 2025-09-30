@@ -8,23 +8,44 @@ MIT
 
 [json.org](http://json.org)
 
+## Prerequisites
+
+### Win32 (Windows) Builds
+
+- **Visual Studio 2022 Build Tools**
+  - Install the "Desktop development with C++" workload.
+  - Ensure the following components are selected:
+    - MSVC v143 - VS 2022 C++ x64/x86 build tools
+    - Windows 10 SDK (or newer)
+    - CMake tools for Windows
+- **CMake** (https://cmake.org/download/)
+
+### glibc (Linux) Builds
+
+- **glibc** (provided by most Linux distributions)
+- **build-essential** (for GCC, g++, make, etc.)
+- **CMake**
+
+Install on Ubuntu:
+
+```sh
+sudo apt update
+sudo apt install build-essential cmake
+```
+
 ## Building, Running, and Testing with Visual Studio 2022 Build Tools
 
-1. Install [Visual Studio 2022 Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
+1. Open the "x64 Native Tools Command Prompt for VS 2022".
 
-2. Download and install [cmake](https://cmake.org/download/) from the official website.
+2. Navigate to the project directory:
 
-3. Open the "x64 Native Tools Command Prompt for VS 2022".
-
-4. Navigate to the project directory:
-
-5. Generate build files with CMake:
+3. Generate build files with CMake:
 
 ```sh
 cmake -S . -B build
 ```
 
-6. Build the project:
+4. Build the project:
 
 To make a Debug build:
 
@@ -38,7 +59,7 @@ To make a Release build:
 cmake --build build --config Release
 ```
 
-7. Run the executable (adjust path if needed):
+5. Run the executable (adjust path if needed):
 
 To run a Debug build:
 
@@ -51,7 +72,7 @@ To run a Release build:
 out\Release\cli.exe
 ````
 
-8. Run unit tests:
+6. Run unit tests:
 
 Unit tests use [doctest](https://github.com/doctest/doctest) version 2.4.12.
 
@@ -69,34 +90,27 @@ out\Release\tests.exe
 
 ## Building and Running on Linux (WSL/Ubuntu)
 
-1. Install required tools:
+1. Navigate to the project directory.
 
-```sh
-sudo apt update
-sudo apt install build-essential cmake
-```
-
-2. Navigate to the project directory.
-
-3. Generate build files:
+2. Generate build files:
 
 ```sh
 cmake -S . -B build
 ```
 
-4. Build the project:
+3. Build the project:
 
 ```sh
 cmake --build build
 ```
 
-5. Run the CLI executable:
+4. Run the CLI executable:
 
 ```sh
 ./out/cli
 ```
 
-6. Run unit tests:
+5. Run unit tests:
 
 ```sh
 ./out/tests
