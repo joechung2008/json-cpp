@@ -4,6 +4,7 @@
 #include <string>
 #include "../types.hpp"
 
-namespace json {
+namespace json
+{
     std::shared_ptr<NumberToken> parseNumber(const std::string&, const std::regex&);
 }

@@ -6,7 +6,7 @@
 
 namespace json
 {
-    std::shared_ptr<NumberToken> parseNumber(const std::string &s, const std::regex &delimiters)
+    std::shared_ptr<NumberToken> parseNumber(const std::string& s, const std::regex& delimiters)
     {
         enum class Mode
         {
@@ -193,4 +193,4 @@ namespace json
         double number = stod(value);
         return std::make_shared<NumberToken>(pos, number);
     }
-}
+} // namespace json

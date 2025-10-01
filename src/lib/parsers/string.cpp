@@ -6,7 +6,7 @@
 
 namespace json
 {
-    std::shared_ptr<StringToken> parseString(const std::string &s)
+    std::shared_ptr<StringToken> parseString(const std::string& s)
     {
         enum class Mode
         {
@@ -121,7 +121,7 @@ namespace json
                     pos += 4;
                     mode = Mode::Char;
                 }
-                catch ([[maybe_unused]] const std::exception &invalid_argument)
+                catch ([[maybe_unused]] const std::exception& invalid_argument)
                 {
                     throw std::runtime_error("unexpected Unicode code");
                 }
@@ -138,4 +138,4 @@ namespace json
 
         return std::make_shared<StringToken>(pos, value);
     }
-}
+} // namespace json

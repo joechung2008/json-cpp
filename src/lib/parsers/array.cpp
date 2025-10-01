@@ -9,7 +9,7 @@
 
 namespace json
 {
-    std::shared_ptr<ArrayToken> parseArray(const std::string &s)
+    std::shared_ptr<ArrayToken> parseArray(const std::string& s)
     {
         enum class Mode
         {
@@ -103,4 +103,4 @@ namespace json
 
         return std::make_shared<ArrayToken>(pos, *pElements);
     }
-}
+} // namespace json

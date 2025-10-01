@@ -10,7 +10,7 @@
 
 namespace json
 {
-    std::shared_ptr<PairToken> parsePair(const std::string &s, const std::regex &delimiters)
+    std::shared_ptr<PairToken> parsePair(const std::string& s, const std::regex& delimiters)
     {
         enum class Mode
         {
@@ -84,4 +84,4 @@ namespace json
 
         return std::make_shared<PairToken>(pos, key, value);
     }
-}
+} // namespace json

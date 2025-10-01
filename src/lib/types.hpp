@@ -1,10 +1,10 @@
 #pragma once
-#include "types/token.hpp"
 #include "types/arraytoken.hpp"
 #include "types/falsetoken.hpp"
-#include "types/numbertoken.hpp"
 #include "types/nulltoken.hpp"
+#include "types/numbertoken.hpp"
 #include "types/objecttoken.hpp"
 #include "types/pairtoken.hpp"
 #include "types/stringtoken.hpp"
+#include "types/token.hpp"
 #include "types/truetoken.hpp"

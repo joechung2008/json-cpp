@@ -18,7 +18,7 @@ int main()
         auto jsonValue = json::parseValue(input);
         std::cout << *jsonValue << std::endl;
     }
-    catch (const std::exception &ex)
+    catch (const std::exception& ex)
     {
         std::cerr << "Error: " << ex.what() << std::endl;
         return 1;

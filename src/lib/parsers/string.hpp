@@ -3,6 +3,7 @@
 #include <string>
 #include "../types.hpp"
 
-namespace json {
+namespace json
+{
     std::shared_ptr<StringToken> parseString(const std::string&);
 }

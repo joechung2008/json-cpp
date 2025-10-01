@@ -2,21 +2,25 @@
 #include <ostream>
 #include "token.hpp"
 
-namespace json {
-    class TrueToken : public Token {
-    public:
-        TrueToken(int skip)
-            : Token(skip), value(true) {
+namespace json
+{
+    class TrueToken : public Token
+    {
+      public:
+        TrueToken(int skip) : Token(skip), value(true)
+        {
         }
-        
-        virtual ~TrueToken() {
+
+        virtual ~TrueToken()
+        {
         }
 
         bool value;
-        
-        std::ostream& writeTo(std::ostream& os) const {
+
+        std::ostream& writeTo(std::ostream& os) const
+        {
             os << std::boolalpha << value;
             return os;
         }
     };
-}
+} // namespace json
