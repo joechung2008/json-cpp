@@ -1,0 +1,28 @@
+---
+# Conservative, C++-focused clang-tidy configuration for json-cpp
+Checks: >
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  hicpp-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  security-*,
+  -bugprone-easily-swappable-parameters,
+  -cert-err33-c,
+  -clang-analyzer-alpha.*,                # disable experimental checks
+  -portability-avoid-pragma-once,
+  -readability-braces-around-statements,
+  -readability-duplicate-include,
+  -readability-else-after-return,
+  -readability-enum-initial-value,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -readability-named-parameter
+
+HeaderFilterRegex: "src/"
+WarningsAsErrors: ""
+FormatStyle: file

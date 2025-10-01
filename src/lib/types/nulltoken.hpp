@@ -7,15 +7,18 @@ namespace json
     class NullToken : public Token
     {
       public:
-        NullToken(int skip) : Token(skip)
+        explicit NullToken(int skip) : Token(skip)
         {
         }
 
-        virtual ~NullToken()
-        {
-        }
+        NullToken(const NullToken&) = default;
+        auto operator=(const NullToken&) -> NullToken& = default;
+        NullToken(NullToken&&) = default;
+        auto operator=(NullToken&&) -> NullToken& = default;
 
-        std::ostream& writeTo(std::ostream& os) const
+        ~NullToken() override = default;
+
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << "null";
             return os;

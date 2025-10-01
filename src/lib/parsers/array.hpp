@@ -5,5 +5,5 @@
 
 namespace json
 {
-    std::shared_ptr<ArrayToken> parseArray(const std::string&);
+    auto parseArray(const std::string&) -> std::shared_ptr<ArrayToken>;
 }

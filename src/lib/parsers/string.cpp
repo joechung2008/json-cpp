@@ -1,14 +1,14 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include <string>
 #include "../types/stringtoken.hpp"
 
 namespace json
 {
-    std::shared_ptr<StringToken> parseString(const std::string& s)
+    auto parseString(const std::string& s) -> std::shared_ptr<StringToken>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             Char,
@@ -116,7 +116,7 @@ namespace json
                 try
                 {
                     std::string slice = s.substr(pos, 4);
-                    int hex = stol(slice, nullptr, 16);
+                    long hex = stol(slice, nullptr, 16);
                     value += static_cast<char>(hex);
                     pos += 4;
                     mode = Mode::Char;

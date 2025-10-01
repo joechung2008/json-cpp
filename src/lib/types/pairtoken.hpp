@@ -10,14 +10,14 @@ namespace json
     {
       public:
         PairToken(int skip, std::shared_ptr<StringToken> key, std::shared_ptr<Token> value)
-            : Token(skip), key(key), value(value)
+            : Token(skip), key(std::move(key)), value(std::move(value))
         {
         }
 
         std::shared_ptr<StringToken> key;
         std::shared_ptr<Token> value;
 
-        std::ostream& writeTo(std::ostream& os) const
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << *key << ":" << *value;
             return os;
@@ -25,7 +25,7 @@ namespace json
     };
 } // namespace json
 
-inline std::ostream& operator<<(std::ostream& os, const json::PairToken& token)
+static auto operator<<(std::ostream& os, const json::PairToken& token) -> std::ostream&
 {
     return token.writeTo(os);
 }

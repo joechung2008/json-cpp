@@ -7,17 +7,20 @@ namespace json
     class TrueToken : public Token
     {
       public:
-        TrueToken(int skip) : Token(skip), value(true)
+        explicit TrueToken(int skip) : Token(skip)
         {
         }
 
-        virtual ~TrueToken()
-        {
-        }
+        TrueToken(const TrueToken&) = default;
+        auto operator=(const TrueToken&) -> TrueToken& = default;
+        TrueToken(TrueToken&&) = default;
+        auto operator=(TrueToken&&) -> TrueToken& = default;
 
-        bool value;
+        ~TrueToken() override = default;
 
-        std::ostream& writeTo(std::ostream& os) const
+        bool value{true};
+
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << std::boolalpha << value;
             return os;

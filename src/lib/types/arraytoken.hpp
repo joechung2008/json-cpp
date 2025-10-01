@@ -9,17 +9,20 @@ namespace json
     class ArrayToken : public Token
     {
       public:
-        ArrayToken(int skip, std::vector<std::shared_ptr<Token>> elements) : Token(skip), elements(elements)
+        ArrayToken(int skip, std::vector<std::shared_ptr<Token>> elements) : Token(skip), elements(std::move(elements))
         {
         }
 
-        virtual ~ArrayToken()
-        {
-        }
+        ArrayToken(const ArrayToken&) = default;
+        auto operator=(const ArrayToken&) -> ArrayToken& = default;
+        ArrayToken(ArrayToken&&) = default;
+        auto operator=(ArrayToken&&) -> ArrayToken& = default;
+
+        ~ArrayToken() override = default;
 
         std::vector<std::shared_ptr<Token>> elements;
 
-        std::ostream& writeTo(std::ostream& os) const
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << "[";
             for (auto it = elements.begin(); it != elements.end(); ++it)

@@ -6,5 +6,6 @@
 
 namespace json
 {
-    std::shared_ptr<Token> parseValue(const std::string&, const std::regex& delimiters = std::regex(R"([ \n\r\t])"));
+    auto parseValue(const std::string&,
+                    const std::regex& delimiters = std::regex(R"([ \n\r\t])")) -> std::shared_ptr<Token>;
 }

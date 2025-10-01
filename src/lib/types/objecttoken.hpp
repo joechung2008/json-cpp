@@ -10,17 +10,20 @@ namespace json
     class ObjectToken : public Token
     {
       public:
-        ObjectToken(int skip, std::vector<std::shared_ptr<PairToken>> pairs) : Token(skip), members(pairs)
+        ObjectToken(int skip, std::vector<std::shared_ptr<PairToken>> pairs) : Token(skip), members(std::move(pairs))
         {
         }
 
-        virtual ~ObjectToken()
-        {
-        }
+        ObjectToken(const ObjectToken&) = default;
+        auto operator=(const ObjectToken&) -> ObjectToken& = default;
+        ObjectToken(ObjectToken&&) = default;
+        auto operator=(ObjectToken&&) -> ObjectToken& = default;
+
+        ~ObjectToken() override = default;
 
         std::vector<std::shared_ptr<PairToken>> members;
 
-        std::ostream& writeTo(std::ostream& os) const
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << "{";
             for (auto it = members.begin(); it != members.end(); ++it)

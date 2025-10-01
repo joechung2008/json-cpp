@@ -1,17 +1,17 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
 #include <string>
-#include <vector>
 #include "../types/arraytoken.hpp"
 #include "../types/token.hpp"
 #include "value.hpp"
 
 namespace json
 {
-    std::shared_ptr<ArrayToken> parseArray(const std::string& s)
+    auto parseArray(const std::string& s) -> std::shared_ptr<ArrayToken>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             Element,

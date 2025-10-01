@@ -1,14 +1,14 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include <string>
 #include "../types/numbertoken.hpp"
 
 namespace json
 {
-    std::shared_ptr<NumberToken> parseNumber(const std::string& s, const std::regex& delimiters)
+    auto parseNumber(const std::string& s, const std::regex& delimiters) -> std::shared_ptr<NumberToken>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             Minus,

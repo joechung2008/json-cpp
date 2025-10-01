@@ -3,6 +3,11 @@ project(json_cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Export compile commands for clang-tidy (Linux/Mac only, avoids Windows symlink issues)
+if(UNIX)
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endif()
+
 # Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/out)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/obj)

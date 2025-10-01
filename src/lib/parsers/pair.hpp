@@ -6,5 +6,5 @@
 
 namespace json
 {
-    std::shared_ptr<PairToken> parsePair(const std::string&, const std::regex&);
+    auto parsePair(const std::string&, const std::regex&) -> std::shared_ptr<PairToken>;
 }

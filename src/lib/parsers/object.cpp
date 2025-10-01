@@ -1,17 +1,17 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
 #include <string>
-#include <vector>
 #include "../types/objecttoken.hpp"
 #include "../types/pairtoken.hpp"
 #include "pair.hpp"
 
 namespace json
 {
-    std::shared_ptr<ObjectToken> parseObject(const std::string& s)
+    auto parseObject(const std::string& s) -> std::shared_ptr<ObjectToken>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             LeftBrace,

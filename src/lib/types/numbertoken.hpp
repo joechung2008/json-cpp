@@ -7,17 +7,20 @@ namespace json
     class NumberToken : public Token
     {
       public:
-        NumberToken(int skip, double number = 0.0) : Token(skip), value(number)
+        explicit NumberToken(int skip, double number = 0.0) : Token(skip), value(number)
         {
         }
 
-        virtual ~NumberToken()
-        {
-        }
+        NumberToken(const NumberToken&) = default;
+        auto operator=(const NumberToken&) -> NumberToken& = default;
+        NumberToken(NumberToken&&) = default;
+        auto operator=(NumberToken&&) -> NumberToken& = default;
+
+        ~NumberToken() override = default;
 
         double value;
 
-        std::ostream& writeTo(std::ostream& os) const
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << value;
             return os;

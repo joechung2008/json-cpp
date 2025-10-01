@@ -8,17 +8,20 @@ namespace json
     class StringToken : public Token
     {
       public:
-        StringToken(int skip, std::string string = "") : Token(skip), value(string)
+        explicit StringToken(int skip, std::string string = "") : Token(skip), value(std::move(string))
         {
         }
 
-        virtual ~StringToken()
-        {
-        }
+        StringToken(const StringToken&) = default;
+        auto operator=(const StringToken&) -> StringToken& = default;
+        StringToken(StringToken&&) = default;
+        auto operator=(StringToken&&) -> StringToken& = default;
+
+        ~StringToken() override = default;
 
         std::string value;
 
-        std::ostream& writeTo(std::ostream& os) const
+        auto writeTo(std::ostream& os) const -> std::ostream& override
         {
             os << "\"" << value << "\"";
             return os;

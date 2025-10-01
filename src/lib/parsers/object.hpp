@@ -5,5 +5,5 @@
 
 namespace json
 {
-    std::shared_ptr<ObjectToken> parseObject(const std::string&);
+    auto parseObject(const std::string&) -> std::shared_ptr<ObjectToken>;
 }

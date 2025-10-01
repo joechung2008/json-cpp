@@ -6,5 +6,5 @@
 
 namespace json
 {
-    std::shared_ptr<NumberToken> parseNumber(const std::string&, const std::regex&);
+    auto parseNumber(const std::string&, const std::regex&) -> std::shared_ptr<NumberToken>;
 }

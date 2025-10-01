@@ -1,7 +1,7 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include <string>
 #include "../types/pairtoken.hpp"
 #include "../types/stringtoken.hpp"
 #include "../types/token.hpp"
@@ -10,9 +10,9 @@
 
 namespace json
 {
-    std::shared_ptr<PairToken> parsePair(const std::string& s, const std::regex& delimiters)
+    auto parsePair(const std::string& s, const std::regex& delimiters) -> std::shared_ptr<PairToken>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             Key,
@@ -29,7 +29,8 @@ namespace json
 
         while (pos < s.length() && mode != Mode::End)
         {
-            std::string ch(1, s[pos]), slice;
+            std::string ch(1, s[pos]);
+            std::string slice;
 
             switch (mode)
             {

@@ -1,7 +1,7 @@
+#include <cstdint>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include <string>
 #include "../types/arraytoken.hpp"
 #include "../types/falsetoken.hpp"
 #include "../types/nulltoken.hpp"
@@ -16,9 +16,9 @@
 
 namespace json
 {
-    std::shared_ptr<Token> parseValue(const std::string& s, const std::regex& delimiters)
+    auto parseValue(const std::string& s, const std::regex& delimiters) -> std::shared_ptr<Token>
     {
-        enum class Mode
+        enum class Mode : std::uint8_t
         {
             Scanning,
             Array,
@@ -39,7 +39,8 @@ namespace json
 
         while (pos < s.length() && mode != Mode::End)
         {
-            std::string ch(1, s[pos]), slice;
+            std::string ch(1, s[pos]);
+            std::string slice;
 
             switch (mode)
             {
