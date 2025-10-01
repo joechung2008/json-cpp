@@ -1,9 +1,10 @@
-#include <string>
-#include <vector>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
+#include <string>
+#include <vector>
+#include "../types/arraytoken.hpp"
+#include "../types/token.hpp"
 #include "value.hpp"
 
 namespace json

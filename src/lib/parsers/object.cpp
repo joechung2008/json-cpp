@@ -1,10 +1,10 @@
-#include <string>
-#include <vector>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
-#include "object.hpp"
+#include <string>
+#include <vector>
+#include "../types/objecttoken.hpp"
+#include "../types/pairtoken.hpp"
 #include "pair.hpp"
 
 namespace json

@@ -1,9 +1,10 @@
-#include <string>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
-#include "pair.hpp"
+#include <string>
+#include "../types/pairtoken.hpp"
+#include "../types/stringtoken.hpp"
+#include "../types/token.hpp"
 #include "string.hpp"
 #include "value.hpp"
 

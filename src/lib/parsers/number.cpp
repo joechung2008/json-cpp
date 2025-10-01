@@ -1,8 +1,8 @@
-#include <string>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
+#include <string>
+#include "../types/numbertoken.hpp"
 
 namespace json
 {

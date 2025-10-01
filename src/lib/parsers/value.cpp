@@ -1,13 +1,18 @@
 #include <memory>
-#include <string>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
+#include <string>
+#include "../types/arraytoken.hpp"
+#include "../types/falsetoken.hpp"
+#include "../types/nulltoken.hpp"
+#include "../types/numbertoken.hpp"
+#include "../types/objecttoken.hpp"
+#include "../types/stringtoken.hpp"
+#include "../types/truetoken.hpp"
 #include "array.hpp"
 #include "number.hpp"
 #include "object.hpp"
 #include "string.hpp"
-#include "value.hpp"
 
 namespace json
 {

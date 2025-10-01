@@ -1,5 +1,6 @@
 #pragma once
-#include <iostream>
+#include <memory>
+#include <ostream>
 #include <vector>
 #include "pairtoken.hpp"
 #include "token.hpp"

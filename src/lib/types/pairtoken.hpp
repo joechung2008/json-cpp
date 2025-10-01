@@ -1,6 +1,6 @@
 #pragma once
-#include <iostream>
-#include <string>
+#include <memory>
+#include <ostream>
 #include "stringtoken.hpp"
 #include "token.hpp"
 

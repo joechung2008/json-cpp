@@ -1,9 +1,8 @@
-#include <string>
 #include <memory>
 #include <regex>
 #include <stdexcept>
-#include "../types.hpp"
-#include "string.hpp"
+#include <string>
+#include "../types/stringtoken.hpp"
 
 namespace json
 {

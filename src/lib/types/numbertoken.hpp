@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include <ostream>
 #include "token.hpp"
 
 namespace json {
