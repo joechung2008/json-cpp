@@ -1,4 +1,4 @@
-#include "doctest.h"
+#include <doctest/doctest.h>
 #include <regex>
 #include <memory>
 #include "../../../src/lib/parsers/value.hpp"

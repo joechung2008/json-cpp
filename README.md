@@ -8,6 +8,10 @@ MIT
 
 [json.org](http://json.org)
 
+## Dependencies
+
+- [doctest](https://github.com/doctest/doctest) v2.4.12 (automatically downloaded via CMake FetchContent)
+
 ## Prerequisites
 
 ### Win32 (Windows) Builds
@@ -74,7 +78,7 @@ out\Release\cli.exe
 
 6. Run unit tests:
 
-Unit tests use [doctest](https://github.com/doctest/doctest) version 2.4.12.
+Unit tests use [doctest](https://github.com/doctest/doctest).
 
 To run tests in Debug build:
 
