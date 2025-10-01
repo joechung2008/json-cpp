@@ -1,6 +1,6 @@
 # Builder stage
 FROM alpine:3.19 AS builder
-RUN apk add --no-cache build-base cmake
+RUN apk add --no-cache build-base cmake git
 WORKDIR /app
 COPY . .
 # Build a static binary for Alpine compatibility
