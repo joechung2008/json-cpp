@@ -1,0 +1,90 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Build (Debug)",
+      "type": "shell",
+      "windows": {
+        "command": "cmake -S . -B build && cmake --build build --config Debug",
+        "problemMatcher": ["$msCompile"]
+      },
+      "linux": {
+        "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build",
+        "problemMatcher": []
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake: Build (Release)",
+      "type": "shell",
+      "windows": {
+        "command": "cmake -S . -B build && cmake --build build --config Release",
+        "problemMatcher": ["$msCompile"]
+      },
+      "linux": {
+        "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build",
+        "problemMatcher": []
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake: Run Tests (Debug)",
+      "type": "shell",
+      "windows": {
+        "command": "out\\Debug\\tests.exe",
+        "problemMatcher": []
+      },
+      "linux": {
+        "command": "./out/tests",
+        "problemMatcher": []
+      },
+      "group": "test",
+      "dependsOn": ["CMake: Build (Debug)"],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake: Run Tests (Release)",
+      "type": "shell",
+      "windows": {
+        "command": "out\\Release\\tests.exe",
+        "problemMatcher": []
+      },
+      "linux": {
+        "command": "./out/tests",
+        "problemMatcher": []
+      },
+      "group": "test",
+      "dependsOn": ["CMake: Build (Release)"],
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake: Clean",
+      "type": "shell",
+      "linux": {
+        "command": "cmake",
+        "args": ["--build", "build", "--target", "clean"],
+        "problemMatcher": []
+      },
+      "windows": {
+        "command": "cmake --build build --target clean --config Debug && cmake --build build --target clean --config Release",
+        "problemMatcher": []
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

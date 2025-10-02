@@ -39,6 +39,7 @@ out/
 *.vscode/
 .vscode/
 !.vscode/extensions.json
+!.vscode/tasks.json
 
 # Qt Creator
 *.pro.user
