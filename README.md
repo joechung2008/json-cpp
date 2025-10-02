@@ -104,3 +104,12 @@ cmake --build build
 ./out/tests
 ./out/tests -s
 ```
+
+## Formatting
+
+- Use `bin/format.sh` (bash) or `bin\format.ps1` (PowerShell) to format code with clang-format.
+
+## Linting
+
+- Use `bin/lint.sh` for clang-tidy analysis (Linux/macOS).
+- Use `bin\lint.ps1` for MSVC static analysis with CppCoreCheck (Windows with VS 2022). The MSVC version uses the C++ ruleset for code quality checks, differing from clang-tidy's customizable checks.
