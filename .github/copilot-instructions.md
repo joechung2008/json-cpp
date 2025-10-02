@@ -1,52 +1,26 @@
 # GitHub Copilot Instructions
 
-## Project Overview
+## General Instructions
 
-This project is a modular C++ JSON parser with a clear separation of concerns:
+- Be concise and direct. Avoid preambles, acknowledgments, or conversational pleasantries.
+- Provide only the answer. Do not include explanations unless specifically asked.
+- Limit responses to the core information requested.
+- Never ask follow-up questions or offer further assistance.
 
-- **CLI entry point:** `src/cli/main.cpp`
-- **Parsers:** `src/lib/parsers/` (modular files for each JSON type)
-- **Token types:** `src/lib/types/` (object-oriented token classes inheriting from `Token`)
+## Testing
 
-## Code Style
+- Do not combine multiple cases into one. Each test should focus on a single aspect or behavior.
+- Ensure tests cover edge cases and potential failure points.
+- JSON tests should be grouped by JSON type: Arrays, Numbers, Objects, Pairs, Strings, Values.
+- Run all tests before committing code to ensure nothing is broken.
+- Use doctest for unit testing and follow best practices.
+- Use descriptive names for test cases.
+- Write tests for all new features and bug fixes.
 
-- Use modern C++ (C++11 or newer) features.
-- Prefer smart pointers (`std::shared_ptr`) for memory management.
-- Use `std::string` and STL containers.
-- Follow consistent indentation (4 spaces).
-- Place opening braces on the same line.
+## Building and Running
 
-## Architectural Patterns
-
-- Keep parsing logic modular: each JSON type has its own parser file/class.
-- Token classes should inherit from the base `Token` class.
-- Use the single-responsibility principle for classes and functions.
-- Prefer composition over inheritance where possible.
-
-## Naming Conventions
-
-- Classes: `PascalCase` (e.g., `ArrayToken`)
-- Functions: `camelCase` (e.g., `parseArray`)
-- Variables: `camelCase`
-- File names: lowercase with type (e.g., `array.cpp`, `arraytoken.hpp`)
-
-## Important Files to Reference
-
-- `src/cli/main.cpp`: CLI entry and argument handling.
-- `src/lib/parsers/array.cpp`, `number.cpp`, etc.: Parsing logic for each JSON type.
-- `src/lib/types/token.hpp`: Base token class.
-- `src/lib/types/arraytoken.hpp`, etc.: Token implementations.
-
-## Additional Guidance
-
-- Write clear, concise comments for complex logic.
-- Ensure code is testable and maintainable.
-- Avoid global variables.
-- Use exceptions for error handling.
-
-## Build and Test Instructions
-
-For details on building the project and running unit tests (Debug/Release), see [README.md](../README.md).  
-Unit tests are provided in the `tests/` directory and can be run using the instructions in the README.
-
-Copilot should generate code that fits these patterns and conventions.
+- Use CMake for building the project.
+- See README.md "Build and run" section for details.
+- Use bin/format.sh (bash) or bin/format.ps1 (PowerShell) for formatting with clang-format.
+- Use bin/lint.sh (bash) for linting with clang-tidy.
+- Prefer bin scripts over direct tool invocation for platform-specific setup.
