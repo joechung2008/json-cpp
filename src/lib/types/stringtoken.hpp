@@ -21,9 +21,10 @@ namespace json
 
         std::string value;
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << "\"" << value << "\"";
+            os << (inl ? "" : std::string(indent, ' ')) << "StringToken { skip: " << skip << ", value: \"" << value
+               << "\" }";
             return os;
         }
     };

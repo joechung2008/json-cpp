@@ -19,11 +19,11 @@ namespace json
 
         virtual ~Token() = default;
 
-        virtual auto writeTo(std::ostream& os) const -> std::ostream& = 0;
+        virtual auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& = 0;
     };
 } // namespace json
 
 static auto operator<<(std::ostream& os, const json::Token& token) -> std::ostream&
 {
-    return token.writeTo(os);
+    return token.writeTo(os, 0, false);
 }

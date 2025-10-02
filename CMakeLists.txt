@@ -50,7 +50,7 @@ if(MSVC)
 endif()
 
 # Doctest integration: add all test sources in tests/
-file(GLOB TEST_SOURCES tests/*.cpp tests/lib/parsers/*.cpp)
+file(GLOB TEST_SOURCES tests/*.cpp tests/lib/parsers/*.cpp tests/lib/types/*.cpp)
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests PRIVATE json_parsers doctest::doctest)
 target_include_directories(tests PRIVATE src/lib/parsers)

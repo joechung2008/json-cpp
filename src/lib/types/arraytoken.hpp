@@ -22,19 +22,25 @@ namespace json
 
         std::vector<std::shared_ptr<Token>> elements;
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << "[";
-            for (auto it = elements.begin(); it != elements.end(); ++it)
+            os << (inl ? "" : std::string(indent, ' ')) << "ArrayToken {\n";
+            os << std::string(indent + 4, ' ') << "elements: [";
+            if (!elements.empty())
             {
-                if (it != elements.begin())
+                os << "\n";
+                for (size_t i = 0; i < elements.size(); ++i)
                 {
-                    os << ",";
+                    elements[i]->writeTo(os, indent + 8, false);
+                    if (i < elements.size() - 1)
+                    {
+                        os << ",";
+                    }
+                    os << "\n";
                 }
-
-                os << **it;
+                os << std::string(indent + 4, ' ');
             }
-            os << "]";
+            os << "]\n" << std::string(indent, ' ') << "}";
             return os;
         }
     };

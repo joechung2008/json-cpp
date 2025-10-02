@@ -20,9 +20,10 @@ namespace json
 
         bool value{true};
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << std::boolalpha << value;
+            os << (inl ? "" : std::string(indent, ' ')) << "TrueToken { skip: " << skip << ", value: " << std::boolalpha
+               << value << " }";
             return os;
         }
     };

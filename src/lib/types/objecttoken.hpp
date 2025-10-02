@@ -23,18 +23,25 @@ namespace json
 
         std::vector<std::shared_ptr<PairToken>> members;
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << "{";
-            for (auto it = members.begin(); it != members.end(); ++it)
+            os << (inl ? "" : std::string(indent, ' ')) << "ObjectToken {\n";
+            os << std::string(indent + 4, ' ') << "members: [";
+            if (!members.empty())
             {
-                if (it != members.begin())
+                os << "\n";
+                for (size_t i = 0; i < members.size(); ++i)
                 {
-                    os << ",";
+                    members[i]->writeTo(os, indent + 8, false);
+                    if (i < members.size() - 1)
+                    {
+                        os << ",";
+                    }
+                    os << "\n";
                 }
-                os << **it;
+                os << std::string(indent + 4, ' ');
             }
-            os << "}";
+            os << "]\n" << std::string(indent, ' ') << "}";
             return os;
         }
     };

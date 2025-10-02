@@ -1,4 +1,5 @@
 #pragma once
+#include <iomanip>
 #include <ostream>
 #include "token.hpp"
 
@@ -20,9 +21,10 @@ namespace json
 
         double value;
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << value;
+            os << (inl ? "" : std::string(indent, ' ')) << "NumberToken { skip: " << skip << ", value: " << std::fixed
+               << std::setprecision(4) << value << " }";
             return os;
         }
     };

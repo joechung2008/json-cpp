@@ -18,9 +18,9 @@ namespace json
 
         ~NullToken() override = default;
 
-        auto writeTo(std::ostream& os) const -> std::ostream& override
+        auto writeTo(std::ostream& os, int indent = 0, bool inl = false) const -> std::ostream& override
         {
-            os << "null";
+            os << (inl ? "" : std::string(indent, ' ')) << "NullToken { skip: " << skip << " }";
             return os;
         }
     };
