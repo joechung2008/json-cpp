@@ -37,7 +37,7 @@ sudo apt update
 sudo apt install build-essential cmake
 ```
 
-## Building, Running, and Testing with Visual Studio 2022 Build Tools
+## Building, Running, and Testing with Windows
 
 1. Open the "x64 Native Tools Command Prompt for VS 2022".
 
@@ -51,15 +51,8 @@ cmake -S . -B build
 
 4. Build the project:
 
-To make a Debug build:
-
 ```sh
-cmake --build build
-```
-
-To make a Release build:
-
-```sh
+cmake --build build --config Debug
 cmake --build build --config Release
 ```
 
@@ -67,39 +60,30 @@ cmake --build build --config Release
 
 To run a Debug build:
 
-````sh
-out\Debug\cli.exe
-
-To run a Release build:
-
 ```sh
+out\Debug\cli.exe
 out\Release\cli.exe
-````
+```
 
 6. Run unit tests:
 
 Unit tests use [doctest](https://github.com/doctest/doctest).
 
-To run tests in Debug build:
-
 ```sh
 out\Debug\tests.exe
-```
-
-To run tests in Release build:
-
-```sh
 out\Release\tests.exe
 ```
 
-## Building and Running on Linux (WSL/Ubuntu)
+## Building, Running, and Testing on Linux
 
 1. Navigate to the project directory.
 
-2. Generate build files:
+2. Generate build files with CMake:
 
 ```sh
-cmake -S . -B build
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 ```
 
 3. Build the project:
@@ -118,4 +102,5 @@ cmake --build build
 
 ```sh
 ./out/tests
+./out/tests -s
 ```
